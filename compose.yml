@@ -1,0 +1,12 @@
+services:
+  store1:
+    build: .
+
+  store2:
+    build: .
+
+  store3:
+    build: .
+
+  store4:
+    build: .

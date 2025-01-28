@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package protos;
+ 
+option go_package = "github.com/GroceryOptimizer/store/proto;protos";
+
+service VendorService {
+    rpc SendMessage (SendMessageRequest) returns (SendMessageReply);    
+};
+
+message SendMessageRequest {
+    string text = 1;
+}
+
+message SendMessageReply {
+    string reply = 1;
+}

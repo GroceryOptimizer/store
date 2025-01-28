@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package vendor;
+
+option csharp_namespace = "VendorProto";
+option go_package = "github.com/GroceryOptimizer/store/proto;vendor";
+
+service VendorService{
+  rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
+}
+
+message SendMessageRequest{
+  string message = 1;
+}
+
+message SendMessageReply{
+  string reply = 1;
+}

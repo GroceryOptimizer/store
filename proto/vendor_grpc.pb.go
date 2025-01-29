@@ -58,7 +58,6 @@ func (c *vendorServiceClient) Products(ctx context.Context, in *InventoryRequest
 	}
 	return out, nil
 }
-
 // VendorServiceServer is the server API for VendorService service.
 // All implementations must embed UnimplementedVendorServiceServer
 // for forward compatibility.

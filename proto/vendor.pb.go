@@ -109,6 +109,7 @@ func (x *SendMessageReply) GetReply() string {
 	return ""
 }
 
+
 type Product struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -293,6 +294,7 @@ func (x *InventoryReply) GetStockItems() []*StockItem {
 	return nil
 }
 
+
 var File_vendor_proto protoreflect.FileDescriptor
 
 var file_vendor_proto_rawDesc = string([]byte{
@@ -332,6 +334,7 @@ var file_vendor_proto_rawDesc = string([]byte{
 	0x72, 0x6f, 0x74, 0x6f, 0x3b, 0x76, 0x65, 0x6e, 0x64, 0x6f, 0x72, 0xaa, 0x02, 0x0b, 0x56, 0x65,
 	0x6e, 0x64, 0x6f, 0x72, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x33,
+
 })
 
 var (
@@ -345,6 +348,7 @@ func file_vendor_proto_rawDescGZIP() []byte {
 	})
 	return file_vendor_proto_rawDescData
 }
+
 
 var file_vendor_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_vendor_proto_goTypes = []any{
@@ -367,6 +371,7 @@ var file_vendor_proto_depIdxs = []int32{
 	2, // [2:2] is the sub-list for extension type_name
 	2, // [2:2] is the sub-list for extension extendee
 	0, // [0:2] is the sub-list for field type_name
+
 }
 
 func init() { file_vendor_proto_init() }

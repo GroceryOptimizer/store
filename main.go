@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+
 	"encoding/json"
 	"fmt"
 	"io"
@@ -20,6 +21,7 @@ import (
 type server struct {
 	vendor.UnimplementedVendorServiceServer
 }
+
 
 // gRPC method to capitalize a message
 func (s *server) SendMessage(ctx context.Context, req *vendor.SendMessageRequest) (*vendor.SendMessageReply, error) {
@@ -65,9 +67,11 @@ func (s *server) Products(ctx context.Context, req *vendor.InventoryRequest) (*v
 
 	resp := &vendor.InventoryReply{
 		StockItems: items,
+
 	}
 	return resp, nil
 }
+
 
 // Read JSON file directly into a slice of gRPC StockItem messages
 func readJSONFile(filename string) ([]*vendor.StockItem, error) {
@@ -107,6 +111,7 @@ func readJSONFile(filename string) ([]*vendor.StockItem, error) {
 }
 
 // HTTP handler for testing
+
 func greet(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World! %s", time.Now())
 }
@@ -114,15 +119,21 @@ func greet(w http.ResponseWriter, r *http.Request) {
 // gRPC Server Initialization
 func main() {
 	lis, err := net.Listen("tcp", ":50051")
+
 	if err != nil {
+
 		log.Fatalf("Failed to listen: %v", err)
 	}
 
 	grpcServer := grpc.NewServer()
+
+
 	vendor.RegisterVendorServiceServer(grpcServer, &server{})
 
 	log.Println("gRPC Go server listening on port 50051...")
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
 	}
+
+
 }

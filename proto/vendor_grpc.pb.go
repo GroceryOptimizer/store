@@ -49,6 +49,7 @@ func (c *vendorServiceClient) SendMessage(ctx context.Context, in *SendMessageRe
 	return out, nil
 }
 
+
 func (c *vendorServiceClient) Products(ctx context.Context, in *InventoryRequest, opts ...grpc.CallOption) (*InventoryReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(InventoryReply)
@@ -58,12 +59,14 @@ func (c *vendorServiceClient) Products(ctx context.Context, in *InventoryRequest
 	}
 	return out, nil
 }
+
 // VendorServiceServer is the server API for VendorService service.
 // All implementations must embed UnimplementedVendorServiceServer
 // for forward compatibility.
 type VendorServiceServer interface {
 	SendMessage(context.Context, *SendMessageRequest) (*SendMessageReply, error)
 	Products(context.Context, *InventoryRequest) (*InventoryReply, error)
+
 	mustEmbedUnimplementedVendorServiceServer()
 }
 
@@ -77,9 +80,11 @@ type UnimplementedVendorServiceServer struct{}
 func (UnimplementedVendorServiceServer) SendMessage(context.Context, *SendMessageRequest) (*SendMessageReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
 }
+
 func (UnimplementedVendorServiceServer) Products(context.Context, *InventoryRequest) (*InventoryReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Products not implemented")
 }
+
 func (UnimplementedVendorServiceServer) mustEmbedUnimplementedVendorServiceServer() {}
 func (UnimplementedVendorServiceServer) testEmbeddedByValue()                       {}
 

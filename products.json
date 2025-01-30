@@ -1,0 +1,64 @@
+{
+    "stock": [
+      {
+        "product": { "name": "milk" },
+        "price": 15
+      },
+      {
+        "product": { "name": "cheese" },
+        "price": 40
+      },
+      {
+        "product": { "name": "bread" },
+        "price": 20
+      },
+      {
+        "product": { "name": "butter" },
+        "price": 25
+      },
+      {
+        "product": { "name": "eggs" },
+        "price": 10
+      },
+      {
+        "product": { "name": "apples" },
+        "price": 5
+      },
+      {
+        "product": { "name": "bananas" },
+        "price": 6
+      },
+      {
+        "product": { "name": "oranges" },
+        "price": 7
+      },
+      {
+        "product": { "name": "potatoes" },
+        "price": 12
+      },
+      {
+        "product": { "name": "onions" },
+        "price": 8
+      },
+      {
+        "product": { "name": "carrots" },
+        "price": 9
+      },
+      {
+        "product": { "name": "chicken" },
+        "price": 60
+      },
+      {
+        "product": { "name": "beef" },
+        "price": 90
+      },
+      {
+        "product": { "name": "fish" },
+        "price": 70
+      },
+      {
+        "product": { "name": "rice" },
+        "price": 30
+      }
+    ]
+    }

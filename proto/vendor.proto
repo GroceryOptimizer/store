@@ -7,6 +7,7 @@ option go_package = "github.com/GroceryOptimizer/store/proto;vendor";
 
 service VendorService{
   rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
+  rpc Products (InventoryRequest) returns (InventoryReply);
 }
 
 message SendMessageRequest{
@@ -15,4 +16,21 @@ message SendMessageRequest{
 
 message SendMessageReply{
   string reply = 1;
+}
+
+message Product{
+  string name = 1;
+}
+
+message InventoryRequest{
+  repeated Product shoppingCart = 1;
+}
+
+message StockItem{
+  string name = 1;
+  int32 price = 2;
+}
+
+message InventoryReply{
+  repeated StockItem stockItems = 1;
 }

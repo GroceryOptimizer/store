@@ -53,7 +53,7 @@ func (s *server) Products(ctx context.Context, req *vendor.InventoryRequest) (*v
 
 	// Filter stock items based on requested shopping cart
 	var items []*vendor.StockItem
-	for _, p := range req.GetShoppingCart() {		
+	for _, p := range req.GetShoppingCart() {
 		var name=strings.ToLower(p.Name)
 		if price, found := stockMap[name]; found {
 			items = append(items, &vendor.StockItem{
@@ -129,6 +129,7 @@ func main() {
 
 
 	vendor.RegisterVendorServiceServer(grpcServer, &server{})
+	fmt.Println(os.Getenv("STORE_NAME"))
 
 	log.Println("gRPC Go server listening on port 50051...")
 	if err := grpcServer.Serve(lis); err != nil {

@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package grpc;
+package grocer;
 
 option csharp_namespace = "VendorProto";
-option go_package = "github.com/GroceryOptimizer/store/proto;grpc";
+option go_package = "github.com/GroceryOptimizer/store/proto;grocer";
 
 service StoreService{
   rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);

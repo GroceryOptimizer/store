@@ -6,4 +6,4 @@ protoc \
     --proto_path=${file_path}/proto \
     --go_out=${file_path}/proto --go_opt=paths=source_relative \
     --go-grpc_out=${file_path}/proto --go-grpc_opt=paths=source_relative \
-    ${file_path}/proto/grpc.proto
+    ${file_path}/proto/*.proto

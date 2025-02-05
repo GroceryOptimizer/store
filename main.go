@@ -8,35 +8,32 @@ import (
 	"io"
 	"log"
 	"net"
-	"net/http"
 	"os"
 	"strings"
-	"time"
 
 	"google.golang.org/grpc"
 
-	vendor "github.com/GroceryOptimizer/store/proto"
+	store "github.com/GroceryOptimizer/store/proto"
 )
 
 type server struct {
-	vendor.UnimplementedVendorServiceServer
+	store.UnimplementedStoreServiceServer
 }
 
-
 // gRPC method to capitalize a message
-func (s *server) SendMessage(ctx context.Context, req *vendor.SendMessageRequest) (*vendor.SendMessageReply, error) {
+func (s *server) SendMessage(ctx context.Context, req *store.SendMessageRequest) (*store.SendMessageResponse, error) {
 	originalMsg := req.GetMessage()
 	capitalizedMsg := strings.ToUpper(originalMsg)
 	fmt.Printf("Received from client: %s\n", req.GetMessage())
 
-	resp := &vendor.SendMessageReply{
+	resp := &store.SendMessageResponse{
 		Reply: "Hello from Go server, you said: " + capitalizedMsg,
 	}
 	return resp, nil
 }
 
 // gRPC method to retrieve product prices
-func (s *server) Products(ctx context.Context, req *vendor.InventoryRequest) (*vendor.InventoryReply, error) {
+func (s *server) Products(ctx context.Context, req *store.InventoryRequest) (*store.InventoryResponse, error) {
 	fmt.Println("Received ShoppingCart message:", len(req.GetShoppingCart()), "products")
 
 	// Read stock items from JSON file
@@ -52,11 +49,11 @@ func (s *server) Products(ctx context.Context, req *vendor.InventoryRequest) (*v
 	}
 
 	// Filter stock items based on requested shopping cart
-	var items []*vendor.StockItem
+	var items []*store.StockItem
 	for _, p := range req.GetShoppingCart() {
-		var name=strings.ToLower(p.Name)
+		var name = strings.ToLower(p.Name)
 		if price, found := stockMap[name]; found {
-			items = append(items, &vendor.StockItem{
+			items = append(items, &store.StockItem{
 				Name:  name,
 				Price: price,
 			})
@@ -65,16 +62,14 @@ func (s *server) Products(ctx context.Context, req *vendor.InventoryRequest) (*v
 		}
 	}
 
-	resp := &vendor.InventoryReply{
+	resp := &store.InventoryResponse{
 		StockItems: items,
-
 	}
 	return resp, nil
 }
 
-
 // Read JSON file directly into a slice of gRPC StockItem messages
-func readJSONFile(filename string) ([]*vendor.StockItem, error) {
+func readJSONFile(filename string) ([]*store.StockItem, error) {
 	file, err := os.Open(filename)
 	if err != nil {
 		return nil, err
@@ -92,13 +87,13 @@ func readJSONFile(filename string) ([]*vendor.StockItem, error) {
 		return nil, err
 	}
 
-	// Extract "stock" key and convert into []*vendor.StockItem
-	var stockItems []*vendor.StockItem
+	// Extract "stock" key and convert into []*store.StockItem
+	var stockItems []*store.StockItem
 	for _, item := range jsonData["stock"] {
 		if product, ok := item["product"].(map[string]interface{}); ok {
 			if name, exists := product["name"].(string); exists {
 				if price, exists := item["price"].(float64); exists { // JSON numbers are float64 by default
-					stockItems = append(stockItems, &vendor.StockItem{
+					stockItems = append(stockItems, &store.StockItem{
 						Name:  name,
 						Price: int32(price),
 					})
@@ -108,12 +103,6 @@ func readJSONFile(filename string) ([]*vendor.StockItem, error) {
 	}
 
 	return stockItems, nil
-}
-
-// HTTP handler for testing
-
-func greet(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World! %s", time.Now())
 }
 
 // gRPC Server Initialization
@@ -127,14 +116,12 @@ func main() {
 
 	grpcServer := grpc.NewServer()
 
-
-	vendor.RegisterVendorServiceServer(grpcServer, &server{})
+	store.RegisterStoreServiceServer(grpcServer, &server{})
 	fmt.Println(os.Getenv("STORE_NAME"))
 
 	log.Println("gRPC Go server listening on port 50051...")
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
 	}
-
 
 }

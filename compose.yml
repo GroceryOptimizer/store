@@ -1,23 +1,23 @@
 services:
   store1:
-    container_name: store_ica
+    container_name: ${STORE1_NAME}
     build: .
     image: store:latest
     environment:
       - STORE_NAME=Ica
     volumes:
-      - ./store1.json:/app/products.json
+      - ./docker/store1.json:/app/products.json
   store2:
     container_name: store_coop
     image: store:latest
     environment:
       - STORE_NAME=Coop
     volumes:
-      - ./store1.json:/app/products.json
+      - ./docker/store1.json:/app/products.json
   store3:
     container_name: store_willys
     image: store:latest
     environment:
       - STORE_NAME=Willys
     volumes:
-      - ./store1.json:/app/products.json
+      - ./docker/store1.json:/app/products.json

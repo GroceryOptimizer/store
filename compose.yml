@@ -1,12 +1,23 @@
 services:
   store1:
+    container_name: store_ica
     build: .
-
+    image: store:latest
+    environment:
+      - STORE_NAME=Ica
+    volumes:
+      - ./store1.json:/app/products.json
   store2:
-    build: .
-
+    container_name: store_coop
+    image: store:latest
+    environment:
+      - STORE_NAME=Coop
+    volumes:
+      - ./store1.json:/app/products.json
   store3:
-    build: .
-
-  store4:
-    build: .
+    container_name: store_willys
+    image: store:latest
+    environment:
+      - STORE_NAME=Willys
+    volumes:
+      - ./store1.json:/app/products.json

@@ -6,15 +6,32 @@ option csharp_namespace = "VendorProto";
 option go_package = "github.com/GroceryOptimizer/store/proto;vendor";
 
 service VendorService{
-  rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
-  rpc Products (InventoryRequest) returns (InventoryReply);
+  rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
+  rpc Products (InventoryRequest) returns (InventoryResponse);
+}
+
+service HubService{
+  rpc HandShake (HandShakeRequest) returns (HandShakeResponse);
+}
+
+message Store{
+  string name = 1;
+}
+
+
+message HandShakeRequest{
+  Store store = 1;
+}
+
+message HandShakeResponse{
+  string id = 1;
 }
 
 message SendMessageRequest{
   string message = 1;
 }
 
-message SendMessageReply{
+message SendMessageResponse{
   string reply = 1;
 }
 
@@ -31,6 +48,6 @@ message StockItem{
   int32 price = 2;
 }
 
-message InventoryReply{
+message InventoryResponse{
   repeated StockItem stockItems = 1;
 }

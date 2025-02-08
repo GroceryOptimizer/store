@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"time"
 
 	"encoding/json"
 	"fmt"
@@ -111,41 +112,77 @@ func readJSONFile(filename string) ([]*grocer.StockItem, error) {
 	return stockItems, nil
 }
 
-func clientHandshake() {
+func clientHandshake(config string) *grocer.HandShakeResponse {
 	addr := os.Getenv("GRPC_SERVER_ADDRESS")
 	if addr == "" {
-        addr = "localhost:5241" // fallback if not set
-    }
-	conn, err := grpc.Dial(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
-	if err != nil {
-		log.Fatalf("Failed to connect to gRPC server: %v", err)
+		addr = "localhost:5241" // fallback if not set
 	}
-	defer conn.Close()
 
 	storeName := os.Getenv("STORE_NAME")
 	if storeName == "" {
 		log.Fatalf("STORE_NAME environment variable not set")
 	}
+
 	store := grocer.Store{Name: storeName}
 
-	client := grocer.NewHubServiceClient(conn)
-	storeId, err := client.HandShake(context.Background(), &grocer.HandShakeRequest{Store: &store})
-	if err != nil {
-		log.Fatalf("Failed to handshake with gRPC server: %v", err)
+	deadline := time.Now().Add(30 * time.Second)
+	var lastErr error
+
+	for {
+		if time.Now() == deadline {
+			log.Fatalf("Handshake timed out: %v", lastErr)
+		}
+		conn, err := grpc.Dial(addr,
+			grpc.WithTransportCredentials(insecure.NewCredentials()),
+			grpc.WithDefaultServiceConfig(config),
+			)
+		if err != nil {
+			lastErr = err
+			log.Printf("Failed to connect to gRPC server: %v", err)
+			time.Sleep(5)
+			continue
+		}
+
+		client := grocer.NewHubServiceClient(conn)
+
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		storeId, err := client.HandShake(ctx, &grocer.HandShakeRequest{Store: &store})
+		cancel()
+		conn.Close()
+		if err != nil {
+			lastErr = err
+			log.Printf("Failed to handshake with gRPC server: %v", err)
+			time.Sleep(5 * time.Second)
+			continue
+		}
+
+		fmt.Println("Store ID:", storeId)
+		return storeId
 	}
-	fmt.Println("Store ID:", storeId)
+
 }
 
 // gRPC Server Initialization
 func main() {
 	lis, err := net.Listen("tcp", ":50051")
-	//var opts *[]grpc.DialOption
-
-	clientHandshake()
 	if err != nil {
 
 		log.Fatalf("Failed to listen: %v", err)
 	}
+	serviceConfig := `{
+	  "methodConfig": [{
+	    "name": [{"service": "grocer.StoreService"}],
+	    "retryPolicy": {
+	      "maxAttempts": 5,
+	      "initialBackoff": "1s",
+	      "maxBackoff": "5s",
+	      "backoffMultiplier": 1.5,
+	      "retryableStatusCodes": ["UNAVAILABLE"]
+	    }
+	  }]
+	}`
+
+	clientHandshake(serviceConfig)
 
 	grpcServer := grpc.NewServer()
 

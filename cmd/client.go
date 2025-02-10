@@ -12,7 +12,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-func ClientHandshake(ctx context.Context, config string) *grocer.HandShakeResponse {
+func ClientHandshake(ctx context.Context, config string) (*grpc.ClientConn, *grocer.HandShakeResponse, error) {
 	addr := os.Getenv("GRPC_SERVER_ADDRESS")
 	if addr == "" {
 		addr = "localhost:5241" // fallback if not set
@@ -35,13 +35,13 @@ func ClientHandshake(ctx context.Context, config string) *grocer.HandShakeRespon
 	var lastErr error
 
 	for {
-		if time.Now() == deadline {
-			log.Fatalf("Handshake timed out: %v", lastErr)
+		if time.Now().After(deadline) {
+			return nil, nil, fmt.Errorf("Handshake timed out after %v: %w", deadline.Sub(time.Now()), lastErr)
 		}
 		conn, err := grpc.Dial(addr,
 			grpc.WithTransportCredentials(insecure.NewCredentials()),
 			grpc.WithDefaultServiceConfig(config),
-			)
+		)
 		if err != nil {
 			lastErr = err
 			log.Printf("Failed to connect to gRPC server: %v", err)
@@ -63,7 +63,7 @@ func ClientHandshake(ctx context.Context, config string) *grocer.HandShakeRespon
 		}
 
 		fmt.Println("Store ID:", storeId)
-		return storeId
+		return conn, storeId, nil
 	}
 
 }

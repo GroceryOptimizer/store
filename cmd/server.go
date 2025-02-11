@@ -3,10 +3,13 @@ package cmd
 import (
 	"context"
 	"fmt"
-	"log"
 	"strings"
-	"github.com/GroceryOptimizer/store/proto"
+
+	"github.com/GroceryOptimizer/store/errors"
+	grocer "github.com/GroceryOptimizer/store/proto"
 	"github.com/GroceryOptimizer/store/tools"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type Server struct {
@@ -15,12 +18,20 @@ type Server struct {
 
 // gRPC method to retrieve product prices
 func (s *Server) Products(ctx context.Context, req *grocer.InventoryRequest) (*grocer.InventoryResponse, error) {
+	if len(req.GetShoppingCart()) == 0 {
+		return nil, errors.ErrInvalidRequest("Shopping cart is empty")
+	}
+
 	fmt.Println("Received ShoppingCart message:", len(req.GetShoppingCart()), "products")
 
 	// Read stock items from JSON file
 	stockItems, err := tools.ReadJSONFile("./products.json")
 	if err != nil {
-		log.Fatalf("Failed to read the JSON file: %v", err)
+		return nil, errors.ErrDatabaseFailure(err)
+	}
+
+	if stockItems != nil || len(stockItems) == 0 {
+		return nil, status.Error(codes.NotFound, "No products available in stock")
 	}
 
 	// Convert stock list into a map for fast lookup
@@ -39,7 +50,7 @@ func (s *Server) Products(ctx context.Context, req *grocer.InventoryRequest) (*g
 				Price: price,
 			})
 		} else {
-			log.Printf("Product not found in stock: %s", name)
+			errors.ErrProductNotFound(name)
 		}
 	}
 
@@ -60,4 +71,3 @@ func (s *Server) SendMessage(ctx context.Context, req *grocer.SendMessageRequest
 	}
 	return resp, nil
 }
-

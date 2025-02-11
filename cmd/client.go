@@ -7,7 +7,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/GroceryOptimizer/store/proto"
+	"github.com/GroceryOptimizer/store/errors"
+	grocer "github.com/GroceryOptimizer/store/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -20,7 +21,7 @@ func ClientHandshake(ctx context.Context, config string) (*grpc.ClientConn, *gro
 
 	storeName := os.Getenv("STORE_NAME")
 	if storeName == "" {
-		log.Fatalf("STORE_NAME environment variable not set")
+		errors.ErrStoreNameEnv("STORE_NAME env is not set")
 	}
 
 	store := grocer.Store{Name: storeName}
@@ -36,16 +37,16 @@ func ClientHandshake(ctx context.Context, config string) (*grpc.ClientConn, *gro
 
 	for {
 		if time.Now().After(deadline) {
-			return nil, nil, fmt.Errorf("Handshake timed out after %v: %w", deadline.Sub(time.Now()), lastErr)
+			log.Printf("handshake timed out after 30 seconds")
+			return nil, nil, lastErr
 		}
 		conn, err := grpc.Dial(addr,
 			grpc.WithTransportCredentials(insecure.NewCredentials()),
 			grpc.WithDefaultServiceConfig(config),
 		)
 		if err != nil {
-			lastErr = err
-			log.Printf("Failed to connect to gRPC server: %v", err)
-			time.Sleep(5)
+			lastErr = errors.ErrClientHandshake("Failed to connect to gRPC server", err)			
+			time.Sleep(5 * time.Second)
 			continue
 		}
 
@@ -56,8 +57,7 @@ func ClientHandshake(ctx context.Context, config string) (*grpc.ClientConn, *gro
 		cancel()
 		conn.Close()
 		if err != nil {
-			lastErr = err
-			log.Printf("Failed to handshake with gRPC server: %v", err)
+			lastErr = errors.ErrClientHandshake("Failed to handshake with gRPC server", err)
 			time.Sleep(5 * time.Second)
 			continue
 		}

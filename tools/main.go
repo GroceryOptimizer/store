@@ -3,14 +3,13 @@ package tools
 import (
 	"encoding/json"
 	"io"
-	"log"
 	"net"
 	"os"
 	"strconv"
 	"strings"
 
 	"github.com/GroceryOptimizer/store/errors"
-	"github.com/GroceryOptimizer/store/proto"
+	grocer "github.com/GroceryOptimizer/store/proto"
 )
 
 func GetClientAddress() string {
@@ -65,4 +64,3 @@ func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {
 
 	return stockItems, nil
 }
-

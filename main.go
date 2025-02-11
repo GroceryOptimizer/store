@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"os"
 	"time"
 
 	"log"
@@ -10,12 +11,17 @@ import (
 	"github.com/GroceryOptimizer/store/cmd"
 	"google.golang.org/grpc"
 
-	"github.com/GroceryOptimizer/store/proto"
+	grocer "github.com/GroceryOptimizer/store/proto"
 )
 
 // gRPC Server Initialization
 func main() {
-	lis, err := net.Listen("tcp", ":50051")
+	port := os.Getenv("STORE_PORT")
+	if port == "" {
+		port = ":12345"
+	}
+
+	lis, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}

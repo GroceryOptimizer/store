@@ -3,11 +3,31 @@ package tools
 import (
 	"encoding/json"
 	"io"
-	"github.com/GroceryOptimizer/store/proto"
+	"log"
+	"net"
 	"os"
+	"strconv"
+	"strings"
+
 	"github.com/GroceryOptimizer/store/errors"
-	
+	"github.com/GroceryOptimizer/store/proto"
 )
+
+func GetClientAddress() string {
+	var host_port []string
+	var store_addr string
+	host := os.Getenv("STORE_HOST")
+	if ips, err := net.LookupHost(host); err == nil && len(ips) > 0 {
+		host = ips[0]
+		host_port = append(host_port, host)
+	}
+	port := os.Getenv("STORE_PORT")
+	if p, err := net.LookupPort("tcp", port); err == nil {
+		host_port = append(host_port, strconv.Itoa(p))
+		store_addr = strings.Join(host_port, ":")
+	}
+	return store_addr
+}
 
 // Read JSON file directly into a slice of gRPC StockItem messages
 func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {

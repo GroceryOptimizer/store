@@ -8,6 +8,8 @@ services:
     environment:
       - STORE_NAME=Ica
       - GRPC_SERVER_ADDRESS=host.docker.internal:5241
+      - STORE_HOST=host.docker.internal
+      - STORE_PORT=50051
     ports:
       - "50051:50051"
     volumes:
@@ -20,6 +22,8 @@ services:
     environment:
       - STORE_NAME=Coop
       - GRPC_SERVER_ADDRESS=host.docker.internal:5241
+      - STORE_HOST=host.docker.internal
+      - STORE_PORT=50051
     ports:
       - "50052:50051"
     volumes:
@@ -32,6 +36,8 @@ services:
     environment:
       - STORE_NAME=Willys
       - GRPC_SERVER_ADDRESS=host.docker.internal:5241
+      - STORE_HOST=host.docker.internal
+      - STORE_PORT=50051
     ports:
       - "50053:50051"
     volumes:

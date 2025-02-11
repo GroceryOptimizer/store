@@ -5,19 +5,21 @@ import (
 	"io"
 	"github.com/GroceryOptimizer/store/proto"
 	"os"
+	"github.com/GroceryOptimizer/store/errors"
+	
 )
 
 // Read JSON file directly into a slice of gRPC StockItem messages
 func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {
 	file, err := os.Open(filename)
 	if err != nil {
-		return nil, err
+		return nil, errors.ErrDatabaseFailure(err)
 	}
 	defer file.Close()
 
 	bytes, err := io.ReadAll(file)
 	if err != nil {
-		return nil, err
+		return nil, errors.ErrDatabaseFailure(err)
 	}
 
 	// Use a generic map to parse JSON without custom structs

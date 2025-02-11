@@ -30,7 +30,7 @@ func (s *Server) Products(ctx context.Context, req *grocer.InventoryRequest) (*g
 		return nil, errors.ErrDatabaseFailure(err)
 	}
 
-	if stockItems != nil || len(stockItems) == 0 {
+	if len(stockItems) == 0 {
 		return nil, status.Error(codes.NotFound, "No products available in stock")
 	}
 

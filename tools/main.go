@@ -3,7 +3,6 @@ package tools
 import (
 	"encoding/json"
 	"io"
-	"log"
 	"net"
 	"os"
 	"strconv"

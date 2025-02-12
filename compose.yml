@@ -27,7 +27,7 @@ services:
     ports:
       - "50052:50051"
     volumes:
-      - ./docker/store1.json:/app/products.json
+      - ./docker/store2.json:/app/products.json
   store3:
     container_name: store_willys
     image: store:latest
@@ -41,4 +41,4 @@ services:
     ports:
       - "50053:50051"
     volumes:
-      - ./docker/store1.json:/app/products.json
+      - ./docker/store3.json:/app/products.json

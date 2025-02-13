@@ -12,6 +12,20 @@ import (
 	grocer "github.com/GroceryOptimizer/store/proto"
 )
 
+func GetStoreCoords() (grocer.Coordinates) {
+	lat, err := strconv.ParseFloat(os.Getenv("LATITUDE"), 64)
+	if err != nil {
+		errors.ErrStoreNameEnv("LATITUDE env is not set")
+	}
+
+	long, err := strconv.ParseFloat(os.Getenv("LONGITUDE"), 64)
+	if err != nil {
+		errors.ErrStoreNameEnv("LONGITUDE env is not set")
+	}
+
+	return grocer.Coordinates{Latitude: lat, Longitude: long}
+}
+
 func GetClientAddress() string {
 	var host_port []string
 	var store_addr string

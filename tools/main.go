@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/GroceryOptimizer/store/errors"
-	"github.com/GroceryOptimizer/store/proto"
+	grocer "github.com/GroceryOptimizer/store/proto"
 )
 
 func GetStoreCoords() (grocer.Coordinates) {
@@ -78,4 +78,3 @@ func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {
 
 	return stockItems, nil
 }
-

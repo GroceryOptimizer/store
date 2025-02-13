@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/GroceryOptimizer/store/errors"
-	"github.com/GroceryOptimizer/store/tools"
 	grocer "github.com/GroceryOptimizer/store/proto"
+	"github.com/GroceryOptimizer/store/tools"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -28,7 +28,9 @@ func ClientHandshake(ctx context.Context, config string) (*grpc.ClientConn, *gro
 
 	store_addr := tools.GetClientAddress()
 
-	store := grocer.Store{Name: storeName}
+	loc := tools.GetStoreCoords()
+
+	store := grocer.Store{Name: storeName, GrpcAddress: store_addr, Location: &loc}
 
 	deadline, ok := ctx.Deadline()
 	if !ok {
@@ -57,7 +59,7 @@ func ClientHandshake(ctx context.Context, config string) (*grpc.ClientConn, *gro
 		client := grocer.NewHubServiceClient(conn)
 
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-		storeId, err := client.HandShake(ctx, &grocer.HandShakeRequest{Store: &store, Address: store_addr})
+		storeId, err := client.HandShake(ctx, &grocer.HandShakeRequest{Store: &store})
 		cancel()
 		conn.Close()
 		if err != nil {

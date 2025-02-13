@@ -16,11 +16,17 @@ service HubService{
 
 message Store{
   string name = 1;
+  string grpcAddress = 2;
+  Coordinates location = 3;
+}
+
+message Coordinates {
+  double latitude = 1;
+  double longitude = 2;
 }
 
 message HandShakeRequest{
   Store store = 1;
-  string address = 2;
 }
 
 message HandShakeResponse{

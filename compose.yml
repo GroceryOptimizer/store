@@ -10,6 +10,8 @@ services:
       - GRPC_SERVER_ADDRESS=host.docker.internal:5241
       - STORE_HOST=host.docker.internal
       - STORE_PORT=50051
+      - LATITUDE=59.3
+      - LONGITUDE=18.1
     ports:
       - "50051:50051"
     volumes:
@@ -24,6 +26,8 @@ services:
       - GRPC_SERVER_ADDRESS=host.docker.internal:5241
       - STORE_HOST=host.docker.internal
       - STORE_PORT=50051
+      - LATITUDE=40.3
+      - LONGITUDE=32.1
     ports:
       - "50052:50051"
     volumes:
@@ -38,6 +42,8 @@ services:
       - GRPC_SERVER_ADDRESS=host.docker.internal:5241
       - STORE_HOST=host.docker.internal
       - STORE_PORT=50051
+      - LATITUDE=70.3
+      - LONGITUDE=42.1
     ports:
       - "50053:50051"
     volumes:

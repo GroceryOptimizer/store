@@ -7,11 +7,12 @@ option go_package = "github.com/GroceryOptimizer/store/proto;grocer";
 
 service StoreService{
   rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
-  rpc Products (InventoryRequest) returns (InventoryResponse);
+  rpc Products (InventoryRequest) returns (InventoryResponse);  
 }
 
 service HubService{
   rpc HandShake (HandShakeRequest) returns (HandShakeResponse);
+  rpc UpdateInventory (UpdateInventoryRequest) returns (UpdateInventoryResponse);
 }
 
 message Store{
@@ -52,8 +53,17 @@ message InventoryRequest{
 message StockItem{
   string name = 1;
   int32 price = 2;
+  int32 quantity = 3;
 }
 
 message InventoryResponse{
   repeated StockItem stockItems = 1;
+}
+
+message UpdateInventoryRequest{
+  repeated StockItem inventory = 1;
+}
+
+message UpdateInventoryResponse{  
+  string message = 1;
 }

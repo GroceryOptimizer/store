@@ -11,7 +11,9 @@ import (
 	grocer "github.com/GroceryOptimizer/store/proto"
 	"github.com/GroceryOptimizer/store/tools"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/status"
 )
 
 func ClientHandshake(ctx context.Context, config string) (*grpc.ClientConn, *grocer.HandShakeResponse, error) {
@@ -72,4 +74,31 @@ func ClientHandshake(ctx context.Context, config string) (*grpc.ClientConn, *gro
 		return conn, storeId, nil
 	}
 
+}
+
+func InventoryListUpdate(ctx context.Context, conn *grpc.ClientConn) (*grocer.UpdateInventoryResponse, error) {
+	defer conn.Close()
+
+	client := grocer.NewHubServiceClient(conn)
+
+	stockItems, err := tools.ReadJSONFile("./products.json")
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Failed to read json file: %v", err)
+	}
+
+	// Send update request to Hub
+	hubReq := &grocer.UpdateInventoryRequest{
+		Inventory: stockItems,
+	}
+
+	hubResp, err := client.UpdateInventory(ctx, hubReq)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Failed to update inventory in Hub: %v", err)
+	}
+
+	// Return response to Store
+	return &grocer.UpdateInventoryResponse{
+		Success: hubResp.Success,
+		Message: hubResp.Message,
+	}, nil
 }

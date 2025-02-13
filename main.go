@@ -37,10 +37,10 @@ func main() {
 	    }
 	  }]
 	}`
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	cmd.ClientHandshake(ctx, serviceConfig)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)	
+	conn,_,_ := cmd.ClientHandshake(ctx, serviceConfig)
 	defer cancel()
-
+	cmd.InventoryListUpdate(ctx, conn)
 	grpcServer := grpc.NewServer()
 
 	grocer.RegisterStoreServiceServer(grpcServer, &cmd.Server{})

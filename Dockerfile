@@ -23,4 +23,4 @@ WORKDIR /app
 COPY --from=build /app/store /app/
 
 EXPOSE 50051
-CMD ["/app/store"]
+CMD ["sh", "-c", "sleep 5 && /app/store"]

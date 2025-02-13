@@ -4,12 +4,11 @@ import (
 	"context"
 	"os"
 	"time"
-
 	"log"
 	"net"
-
 	"github.com/GroceryOptimizer/store/cmd"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 
 	grocer "github.com/GroceryOptimizer/store/proto"
 )
@@ -21,7 +20,7 @@ func main() {
 		port = ":12345"
 	}
 
-	lis, err := net.Listen("tcp", ":"+port)
+	lis, err := net.Listen("tcp", "0.0.0.0:50051")
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
@@ -45,6 +44,7 @@ func main() {
 
 	grocer.RegisterStoreServiceServer(grpcServer, &cmd.Server{})
 
+	reflection.Register(grpcServer)
 	//fmt.Println(os.Getenv("STORE_NAME"))
 
 	log.Println("gRPC Go server listening on port 50051...")

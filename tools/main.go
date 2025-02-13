@@ -7,7 +7,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-
+	"log"
 	"github.com/GroceryOptimizer/store/errors"
 	grocer "github.com/GroceryOptimizer/store/proto"
 )
@@ -29,16 +29,18 @@ func GetStoreCoords() (grocer.Coordinates) {
 func GetClientAddress() string {
 	var host_port []string
 	var store_addr string
-	host := os.Getenv("STORE_HOST")
-	if ips, err := net.LookupHost(host); err == nil && len(ips) > 0 {
-		host = ips[0]
-		host_port = append(host_port, host)
-	}
+
+	hostname:= os.Getenv("STORE_NAME")
+	log.Println("Hostname collected: ", hostname)
+
+	host_port = append(host_port, hostname)
+
 	port := os.Getenv("STORE_PORT")
-	if p, err := net.LookupPort("tcp", port); err == nil {
+	if p, err := net.LookupPort("tcp", port); err == nil{
 		host_port = append(host_port, strconv.Itoa(p))
 		store_addr = strings.Join(host_port, ":")
 	}
+	log.Println("About to send handshake with address: ", store_addr)
 	return store_addr
 }
 

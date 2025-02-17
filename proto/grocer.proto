@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package grocer;
+
+option csharp_namespace = "VendorProto";
+option go_package = "github.com/GroceryOptimizer/store/proto;grocer";
+
+service StoreService{
+  rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
+  rpc Products (InventoryRequest) returns (InventoryResponse);
+}
+
+service HubService{
+  rpc HandShake (HandShakeRequest) returns (HandShakeResponse);
+}
+
+message Store{
+  string name = 1;
+  string grpcAddress = 2;
+  Coordinates location = 3;
+}
+
+message Coordinates {
+  double latitude = 1;
+  double longitude = 2;
+}
+
+message HandShakeRequest{
+  Store store = 1;
+}
+
+message HandShakeResponse{
+  string id = 1;
+}
+
+message SendMessageRequest{
+  string message = 1;
+}
+
+message SendMessageResponse{
+  string reply = 1;
+}
+
+message Product{
+  string name = 1;
+}
+
+message InventoryRequest{
+  repeated Product shoppingCart = 1;
+}
+
+message StockItem{
+  string name = 1;
+  int32 price = 2;
+}
+
+message InventoryResponse{
+  repeated StockItem stockItems = 1;
+}

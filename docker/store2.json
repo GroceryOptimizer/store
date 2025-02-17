@@ -1,0 +1,65 @@
+{
+  "stock": [
+    {
+      "product": { "name": "yogurt" },
+      "price": 18
+    },
+    {
+      "product": { "name": "ham" },
+      "price": 50
+    },
+    {
+      "product": { "name": "baguette" },
+      "price": 22
+    },
+    {
+      "product": { "name": "margarine" },
+      "price": 20
+    },
+    {
+      "product": { "name": "duck eggs" },
+      "price": 14
+    },
+    {
+      "product": { "name": "pears" },
+      "price": 6
+    },
+    {
+      "product": { "name": "kiwis" },
+      "price": 8
+    },
+    {
+      "product": { "name": "lemons" },
+      "price": 9
+    },
+    {
+      "product": { "name": "tomatoes" },
+      "price": 15
+    },
+    {
+      "product": { "name": "garlic" },
+      "price": 4
+    },
+    {
+      "product": { "name": "spinach" },
+      "price": 7
+    },
+    {
+      "product": { "name": "turkey" },
+      "price": 80
+    },
+    {
+      "product": { "name": "lamb" },
+      "price": 100
+    },
+    {
+      "product": { "name": "shrimp" },
+      "price": 85
+    },
+    {
+      "product": { "name": "quinoa" },
+      "price": 35
+    }
+  ]
+}
+

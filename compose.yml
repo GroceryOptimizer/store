@@ -1,12 +1,50 @@
 services:
   store1:
+    container_name: store_ica
     build: .
-
+    image: store:latest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - STORE_NAME=Ica
+      - GRPC_SERVER_ADDRESS=host.docker.internal:5241
+      - STORE_HOST=host.docker.internal
+      - STORE_PORT=50051
+      - LATITUDE=59.3
+      - LONGITUDE=18.1
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./docker/store1.json:/app/products.json
   store2:
-    build: .
-
+    container_name: store_coop
+    image: store:latest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - STORE_NAME=Coop
+      - GRPC_SERVER_ADDRESS=host.docker.internal:5241
+      - STORE_HOST=host.docker.internal
+      - LATITUDE=40.3
+      - LONGITUDE=32.1
+      - STORE_PORT=50052
+    ports:
+      - "50052:50052"
+    volumes:
+      - ./docker/store2.json:/app/products.json
   store3:
-    build: .
-
-  store4:
-    build: .
+    container_name: store_willys
+    image: store:latest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - STORE_NAME=Willys
+      - GRPC_SERVER_ADDRESS=host.docker.internal:5241
+      - STORE_HOST=host.docker.internal
+      - LATITUDE=70.3
+      - LONGITUDE=42.1
+      - STORE_PORT=50053
+    ports:
+      - "50053:50053"
+    volumes:
+      - ./docker/store3.json:/app/products.json

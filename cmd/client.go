@@ -76,7 +76,7 @@ func ClientHandshake(ctx context.Context, config string) (*grpc.ClientConn, *gro
 
 }
 
-func InventoryListUpdate(ctx context.Context, conn *grpc.ClientConn) (*grocer.UpdateInventoryResponse, error) {
+func SendInventoryList(ctx context.Context, conn *grpc.ClientConn) (*grocer.UpdateInventoryResponse, error) {
 	defer conn.Close()
 
 	client := grocer.NewHubServiceClient(conn)
@@ -98,7 +98,6 @@ func InventoryListUpdate(ctx context.Context, conn *grpc.ClientConn) (*grocer.Up
 
 	// Return response to Store
 	return &grocer.UpdateInventoryResponse{
-		Success: hubResp.Success,
 		Message: hubResp.Message,
 	}, nil
 }

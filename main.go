@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"os"
+	"sync"
 	"time"
 
 	"log"
@@ -37,17 +38,31 @@ func main() {
 	    }
 	  }]
 	}`
+	wg := &sync.WaitGroup{}
+
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	conn,_,_ := cmd.ClientHandshake(ctx, serviceConfig)
 	defer cancel()
-	cmd.SendInventoryList(ctx, conn)
+
+	conn := &grpc.ClientConn{}
+	res := &grocer.HandShakeResponse{}
+	wg.Add(1)
+	go func () {
+		defer wg.Done()
+		conn, res, _ = cmd.ClientHandshake(ctx, serviceConfig)
+	}()
+	wg.Wait()
+	defer conn.Close()
+
+	resp, _ := cmd.SendInventoryList(ctx, conn, res.Id)
+	log.Println("inventory response: ", resp)
+
 	grpcServer := grpc.NewServer()
 
 	grocer.RegisterStoreServiceServer(grpcServer, &cmd.Server{})
 
 	//fmt.Println(os.Getenv("STORE_NAME"))
 
-	log.Println("gRPC Go server listening on port 50051...")
+	log.Printf("gRPC Go server listening on port %s", port)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
 	}

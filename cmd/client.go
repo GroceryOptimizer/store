@@ -61,23 +61,25 @@ func ClientHandshake(ctx context.Context, config string) (*grpc.ClientConn, *gro
 		client := grocer.NewHubServiceClient(conn)
 
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-		storeId, err := client.HandShake(ctx, &grocer.HandShakeRequest{Store: &store})
+		res, err := client.HandShake(ctx, &grocer.HandShakeRequest{Store: &store})
 		cancel()
-		conn.Close()
+		//conn.Close()
 		if err != nil {
 			lastErr = errors.ErrClientHandshake("Failed to handshake with gRPC server", err)
 			time.Sleep(5 * time.Second)
 			continue
 		}
 
-		fmt.Println("Store ID:", storeId)
-		return conn, storeId, nil
+		fmt.Println("Store ID:", res)
+		return conn, res, nil
 	}
 
 }
 
-func SendInventoryList(ctx context.Context, conn *grpc.ClientConn) (*grocer.UpdateInventoryResponse, error) {
-	defer conn.Close()
+func SendInventoryList(ctx context.Context, conn *grpc.ClientConn, storeId string) (*grocer.UpdateInventoryResponse, error) {
+	//defer conn.Close()
+	log.Println("conn: ", conn)
+	log.Println("storeId: ", storeId)
 
 	client := grocer.NewHubServiceClient(conn)
 
@@ -88,11 +90,13 @@ func SendInventoryList(ctx context.Context, conn *grpc.ClientConn) (*grocer.Upda
 
 	// Send update request to Hub
 	hubReq := &grocer.UpdateInventoryRequest{
-		Inventory: stockItems,
+		StoreId:   storeId,
+		StockItems: stockItems,
 	}
 
 	hubResp, err := client.UpdateInventory(ctx, hubReq)
 	if err != nil {
+		log.Println("Failed to update inventory in Hub: ", err)
 		return nil, status.Errorf(codes.Internal, "Failed to update inventory in Hub: %v", err)
 	}
 

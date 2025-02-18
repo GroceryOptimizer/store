@@ -61,6 +61,8 @@ func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {
 		return nil, err
 	}
 
+	// TODO: // This may be broken, check it
+
 	// Extract "stock" key and convert into []*grocer.StockItem
 	var stockItems []*grocer.StockItem
 	for _, item := range jsonData["stock"] {
@@ -69,7 +71,7 @@ func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {
 				if quantity, exists := product["quantity"].(int32); exists {
 					if price, exists := item["price"].(float64); exists { // JSON numbers are float64 by default
 						stockItems = append(stockItems, &grocer.StockItem{
-							Name:     name,
+							Product:    &grocer.Product{Name: name},
 							Quantity: quantity,
 							Price:    int32(price),
 						})

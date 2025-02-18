@@ -12,7 +12,7 @@ import (
 	grocer "github.com/GroceryOptimizer/store/proto"
 )
 
-func GetStoreCoords() (grocer.Coordinates) {
+func GetStoreCoords() grocer.Coordinates {
 	lat, err := strconv.ParseFloat(os.Getenv("LATITUDE"), 64)
 	if err != nil {
 		errors.ErrStoreNameEnv("LATITUDE env is not set")
@@ -66,11 +66,14 @@ func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {
 	for _, item := range jsonData["stock"] {
 		if product, ok := item["product"].(map[string]interface{}); ok {
 			if name, exists := product["name"].(string); exists {
-				if price, exists := item["price"].(float64); exists { // JSON numbers are float64 by default
-					stockItems = append(stockItems, &grocer.StockItem{
-						Name:  name,
-						Price: int32(price),
-					})
+				if quantity, exists := product["quantity"].(int32); exists {
+					if price, exists := item["price"].(float64); exists { // JSON numbers are float64 by default
+						stockItems = append(stockItems, &grocer.StockItem{
+							Name:     name,
+							Quantity: quantity,
+							Price:    int32(price),
+						})
+					}
 				}
 			}
 		}

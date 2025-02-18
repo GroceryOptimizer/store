@@ -1,63 +1,63 @@
 {
     "stock": [
       {
-        "product": { "name": "milk" },
+        "product": { "name": "milk", "quantity": 10 },
         "price": 15
       },
       {
-        "product": { "name": "cheese" },
+        "product": { "name": "cheese", "quantity": 20 },
         "price": 40
       },
       {
-        "product": { "name": "bread" },
+        "product": { "name": "bread", "quantity": 15 },
         "price": 20
       },
       {
-        "product": { "name": "butter" },
+        "product": { "name": "butter", "quantity": 10 },
         "price": 25
       },
       {
-        "product": { "name": "eggs" },
+        "product": { "name": "eggs", "quantity": 30 },
         "price": 10
       },
       {
-        "product": { "name": "apples" },
+        "product": { "name": "apples", "quantity": 10 },
         "price": 5
       },
       {
-        "product": { "name": "bananas" },
+        "product": { "name": "bananas", "quantity": 15 },
         "price": 6
       },
       {
-        "product": { "name": "oranges" },
+        "product": { "name": "oranges", "quantity": 10 },
         "price": 7
       },
       {
-        "product": { "name": "potatoes" },
+        "product": { "name": "potatoes", "quantity": 20 },
         "price": 12
       },
       {
-        "product": { "name": "onions" },
+        "product": { "name": "onions", "quantity": 10 },
         "price": 8
       },
       {
-        "product": { "name": "carrots" },
+        "product": { "name": "carrots", "quantity": 10 },
         "price": 9
       },
       {
-        "product": { "name": "chicken" },
+        "product": { "name": "chicken", "quantity": 10 },
         "price": 60
       },
       {
-        "product": { "name": "beef" },
+        "product": { "name": "beef", "quantity": 10 },
         "price": 90
       },
       {
-        "product": { "name": "fish" },
+        "product": { "name": "fish", "quantity": 10 },
         "price": 70
       },
       {
-        "product": { "name": "rice" },
+        "product": { "name": "rice", "quantity": 20 },
         "price": 30
       }
     ]

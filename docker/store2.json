@@ -1,63 +1,63 @@
 {
   "stock": [
     {
-      "product": { "name": "yogurt" },
+      "product": { "name": "yogurt", "quantity": 10 },
       "price": 18
     },
     {
-      "product": { "name": "ham" },
+      "product": { "name": "ham", "quantity": 20 },
       "price": 50
     },
     {
-      "product": { "name": "baguette" },
+      "product": { "name": "baguette", "quantity": 15 },
       "price": 22
     },
     {
-      "product": { "name": "margarine" },
+      "product": { "name": "margarine", "quantity": 10 },
       "price": 20
     },
     {
-      "product": { "name": "duck eggs" },
+      "product": { "name": "duck eggs", "quantity": 30 },
       "price": 14
     },
     {
-      "product": { "name": "pears" },
+      "product": { "name": "pears", "quantity": 10 },
       "price": 6
     },
     {
-      "product": { "name": "kiwis" },
+      "product": { "name": "kiwis", "quantity": 15 },
       "price": 8
     },
     {
-      "product": { "name": "lemons" },
+      "product": { "name": "lemons", "quantity": 30 },
       "price": 9
     },
     {
-      "product": { "name": "tomatoes" },
+      "product": { "name": "tomatoes", "quantity": 20 },
       "price": 15
     },
     {
-      "product": { "name": "garlic" },
+      "product": { "name": "garlic", "quantity": 100 },
       "price": 4
     },
     {
-      "product": { "name": "spinach" },
+      "product": { "name": "spinach", "quantity": 10 },
       "price": 7
     },
     {
-      "product": { "name": "turkey" },
+      "product": { "name": "turkey", "quantity": 10 },
       "price": 80
     },
     {
-      "product": { "name": "lamb" },
+      "product": { "name": "lamb", "quantity": 19 },
       "price": 100
     },
     {
-      "product": { "name": "shrimp" },
+      "product": { "name": "shrimp", "quantity": 10 },
       "price": 85
     },
     {
-      "product": { "name": "quinoa" },
+      "product": { "name": "quinoa", "quantity": 20 },
       "price": 35
     }
   ]

@@ -61,8 +61,8 @@ func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {
 		return nil, err
 	}
 
-	// TODO: // This may be broken, check it
 
+	// TODO: // This may be broken, check it
 	// Extract "stock" key and convert into []*grocer.StockItem
 	var stockItems []*grocer.StockItem
 	for _, item := range jsonData["stock"] {

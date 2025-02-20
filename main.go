@@ -53,7 +53,7 @@ func main() {
 	wg.Wait()
 	defer conn.Close()
 
-	resp, _ := cmd.SendInventoryList(ctx, conn, res.Id)
+	resp, _ := cmd.UpdateInventory(ctx, conn, res.Id)
 	log.Println("inventory response: ", resp)
 
 	grpcServer := grpc.NewServer()

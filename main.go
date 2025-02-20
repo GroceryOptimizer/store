@@ -18,14 +18,16 @@ import (
 // gRPC Server Initialization
 func main() {
 	port := os.Getenv("STORE_PORT")
+	log.Printf("port: %v", port)
 	if port == "" {
-		port = ":12345"
+		port = "12345"
 	}
 
 	lis, err := net.Listen("tcp", ":"+port)
 	if err != nil {
-		log.Fatalf("Failed to listen: %v", err)
+		log.Fatalf("Failed to listen to %s: %v", port, err)
 	}
+	log.Printf("gRPC Go server listening on port %v", port)
 	serviceConfig := `{
 	  "methodConfig": [{
 	    "name": [{"service": "grocer.StoreService"}],
@@ -62,7 +64,6 @@ func main() {
 
 	//fmt.Println(os.Getenv("STORE_NAME"))
 
-	log.Printf("gRPC Go server listening on port %s", port)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
 	}

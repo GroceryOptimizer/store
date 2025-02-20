@@ -87,9 +87,6 @@ func UpdateInventory(ctx context.Context, conn *grpc.ClientConn, storeId string)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "Failed to read json file: %v", err)
 	}
-	for _, item := range stockItems {
-		log.Println("stockItems: ", item)
-	}
 
 	// Send update request to Hub
 	hubReq := &grocer.UpdateInventoryRequest{

@@ -1,0 +1,40 @@
+{
+  "stock": [
+    {
+      "product": {
+        "name": "chicken"
+      },
+      "price": 55
+    },
+    {
+      "product": {
+        "name": "beef"
+      },
+      "price": 85
+    },
+    {
+      "product": {
+        "name": "fish"
+      },
+      "price": 75
+    },
+    {
+      "product": {
+        "name": "pork"
+      },
+      "price": 80
+    },
+    {
+      "product": {
+        "name": "lamb"
+      },
+      "price": 95
+    },
+    {
+      "product": {
+        "name": "duck"
+      },
+      "price": 65
+    }
+  ]
+}

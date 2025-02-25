@@ -42,13 +42,6 @@ graph LR
     MS -->|Responds with route and store data| API
     API -->|Returns result| UI
 ```
-### Deployment
-
-Each Store Service instance is deployed independently, typically corresponding to a physical store location. This approach allows for:
-
-- Independent scaling of resources for each store based on demand.
-- Isolated updates and maintenance without affecting other stores.
-- Resilience, as issues with one store instance do not impact others.
 
 ---
 

@@ -17,8 +17,8 @@ import (
 // gRPC Server Initialization
 func main() {
 	port := os.Getenv("STORE_PORT")
-	if port == "" {
-		port = ":12345"
+	if len(port) == 0 {
+		port = "50051"
 	}
 
 	lis, err := net.Listen("tcp", ":"+port)
@@ -47,7 +47,7 @@ func main() {
 
 	//fmt.Println(os.Getenv("STORE_NAME"))
 
-	log.Println("gRPC Go server listening on port 50051...")
+	log.Printf("gRPC Go server listening on port %s", port)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
 	}

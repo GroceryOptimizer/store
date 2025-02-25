@@ -10,7 +10,7 @@ The Store Service is a key component in the grocery shopping system. It interact
 
 1. **User Client (UI)**: The frontend interface where users input their shopping list.
 2. **API Layer**: Handles REST API requests from the client and communicates with the Hub Service.
-3. **Hub Service**: Aggregates stock information and optimizes the shopping route.
+3. **Client Service**: Aggregates stock information and optimizes the shopping route.
 4. **Store Services (Store 1, Store 2, Store 3, etc.)**: Provides stock status and pricing via gRPC.
 
 ---
@@ -23,10 +23,8 @@ The Store Service is a key component in the grocery shopping system. It interact
 3. The **API Layer** forwards the request to the **Hub Service**.
 4. The **Hub Service** queries multiple **Store Services** (Store 1, Store 2, Store 3, etc.) via **gRPC** to retrieve stock availability and pricing.
 5. Each **Store Service** responds with stock data.
-6. The **Hub Service** aggregates the responses and determines an optimized shopping route.
-7. The **Hub Service** sends the optimized route and store data back to the **API Layer**.
-8. The **API Layer** returns the response to the **User Client**.
-9. The **User Client** displays the results to the **User**.
+6. The **Client Service** aggregates the responses and determines an optimized shopping route.
+7. The **User Client (UI)** displays the results to the **User**.
 
 ### Component Communication
 ```mermaid
@@ -63,88 +61,6 @@ Each instance is deployed independently, typically corresponding to a physical s
 
 ---
 
-## Dependencies & Setup
- 
-This project depends on:  
-- **GroceryOptimizer Client**: [GitHub Repo](https://github.com/GroceryOptimizer/client)  
-- **GroceryOptimizer Hub**: [GitHub Repo](https://github.com/GroceryOptimizer/hub)  
-
-### Client (UI - TypeScript + React)
-#### VSCode / Terminal Setup:
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/GroceryOptimizer/client.git
-   ```
-2. Navigate to the project folder:
-   ```sh
-   cd client
-   ```
-3. Install dependencies:
-   ```sh
-   npm install
-   ```
-4. Start the development server:
-   ```sh
-   npm run dev
-   ```
-### Hub (Backend - C#)
-#### Visual Studio Setup:
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/GroceryOptimizer/hub.git
-   ```
-2. Open the project in Visual Studio.
-3. Restore dependencies:
-   ```sh
-   dotnet restore
-   ```
-4. Build the project:
-   ```sh
-   dotnet build
-   ```
-5. Run the application:
-   ```sh
-   dotnet run
-   ```
-
-#### VSCode / Terminal Setup:
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/GroceryOptimizer/hub.git
-   ```
-2. Navigate to the project folder:
-   ```sh
-   cd hub
-   ```
-3. Restore dependencies:
-   ```sh
-   dotnet restore
-   ```
-4. Build the project:
-   ```sh
-   dotnet build
-   ```
-5. Run the application:
-   ```sh
-   dotnet run
-   ```
-
-### Store (Backend - Golang, Dockerized)
-#### VSCode / Terminal Setup:
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/GroceryOptimizer/store.git
-   ```
-2. Navigate to the project folder:
-   ```sh
-   cd store
-   ```
-3. Build and run the Docker container:
-   ```sh
-   docker build -t store-service .
-   docker run -d -p 50051:50051 store-service
-   ```
----
 
 ## Future Improvements (v2)
 Potential areas for future development of the Store Service include:

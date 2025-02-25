@@ -3,6 +3,7 @@ package cmd
 import (
 	"context"
 	"fmt"
+	"log"
 	"strings"
 
 	"github.com/GroceryOptimizer/store/errors"
@@ -37,19 +38,22 @@ func (s *Server) Products(ctx context.Context, req *grocer.InventoryRequest) (*g
 	// Convert stock list into a map for fast lookup
 	stockMap := make(map[string]int32)
 	for _, item := range stockItems {
-		stockMap[item.Name] = item.Price
+		stockMap[strings.ToLower(item.Name)] = item.Price
 	}
 
 	// Filter stock items based on requested shopping cart
 	var items []*grocer.StockItem
 	for _, p := range req.GetShoppingCart() {
+		log.Printf("Checking product: %s\n", p)
 		var name = strings.ToLower(p.Name)
 		if price, found := stockMap[name]; found {
 			items = append(items, &grocer.StockItem{
 				Name:  name,
 				Price: price,
 			})
+			log.Printf("Product found: %s\n", name)
 		} else {
+			log.Printf("Product not found: %s\n", name)
 			errors.ErrProductNotFound(name)
 		}
 	}

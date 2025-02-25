@@ -3,6 +3,7 @@ package tools
 import (
 	"encoding/json"
 	"io"
+	"log"
 	"net"
 	"os"
 	"strconv"
@@ -12,7 +13,7 @@ import (
 	grocer "github.com/GroceryOptimizer/store/proto"
 )
 
-func GetStoreCoords() (grocer.Coordinates) {
+func GetStoreCoords() grocer.Coordinates {
 	lat, err := strconv.ParseFloat(os.Getenv("LATITUDE"), 64)
 	if err != nil {
 		errors.ErrStoreNameEnv("LATITUDE env is not set")
@@ -42,6 +43,13 @@ func GetClientAddress() string {
 	return store_addr
 }
 
+type StockItemJSON struct {
+	Id       string  `json:"id"`
+	Name     string  `json:"name"`
+	Price    float64 `json:"price"`
+	Quantity int32   `json:"quantity"`
+}
+
 // Read JSON file directly into a slice of gRPC StockItem messages
 func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {
 	file, err := os.Open(filename)
@@ -56,25 +64,20 @@ func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {
 	}
 
 	// Use a generic map to parse JSON without custom structs
-	var jsonData map[string][]map[string]interface{}
+	var jsonData []StockItemJSON
 	if err := json.Unmarshal(bytes, &jsonData); err != nil {
 		return nil, err
 	}
 
 	// Extract "stock" key and convert into []*grocer.StockItem
 	var stockItems []*grocer.StockItem
-	for _, item := range jsonData["stock"] {
-		if product, ok := item["product"].(map[string]interface{}); ok {
-			if name, exists := product["name"].(string); exists {
-				if price, exists := item["price"].(float64); exists { // JSON numbers are float64 by default
-					stockItems = append(stockItems, &grocer.StockItem{
-						Name:  name,
-						Price: int32(price),
-					})
-				}
-			}
+	for _, item := range jsonData {
+		stockitem := &grocer.StockItem{
+			Name:  item.Name,
+			Price: int32(item.Price),
 		}
+		log.Printf("StockItem: %v\n", stockitem)
+		stockItems = append(stockItems, stockitem)
 	}
-
 	return stockItems, nil
 }

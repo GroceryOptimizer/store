@@ -34,5 +34,53 @@
     "name": "Mjukost",
     "price": 31.00,
     "quantity": 30
+  },
+  {
+    "id": "19DD4653-0075-43FD-AFE6-591692D2DED5",
+    "name": "Viking Mjöl",
+    "price": 18.00,
+    "quantity": 20
+  },
+  {
+    "id": "45F4EF7A-D58F-455D-A651-48D1087F0791",
+    "name": "Gräddfil",
+    "price": 12.00,
+    "quantity": 26
+  },
+  {
+    "id": "5348EAFE-24E3-4679-B78A-034B32ABB48F",
+    "name": "Risenta Gryn",
+    "price": 13.50,
+    "quantity": 32
+  },
+  {
+    "id": "E5F6A7B8-C9D0-1234-5678-90ABCDEFABCD",
+    "name": "Osthyvel",
+    "price": 59.90,
+    "quantity": 12
+  },
+  {
+    "id": "F6A7B8C9-D0E1-2345-6789-0ABCDEFABCDE",
+    "name": "Diskmedel",
+    "price": 9.90,
+    "quantity": 25
+  },
+  {
+    "id": "A7B8C9D0-E1F2-3456-7890-ABCDEFABCDEF",
+    "name": "Toalettpapper",
+    "price": 24.90,
+    "quantity": 30
+  },
+  {
+    "id": "B8C9D0E1-F2A3-4567-8901-BCDEFABCDEF0",
+    "name": "Tandborste",
+    "price": 29.90,
+    "quantity": 20
+  },
+  {
+    "id": "C9D0E1F2-A3B4-5678-9012-CDEFABCDEF01",
+    "name": "Schampo",
+    "price": 39.90,
+    "quantity": 15
   }
 ]

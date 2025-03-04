@@ -24,15 +24,81 @@
     "quantity": 35
   },
   {
-    "id": "8926A5A1-437C-4EBD-B331-E6A9BFA02C5B",
-    "name": "Tacoskal",
-    "price": 13.50,
-    "quantity": 28
+    "id": "D0E1F2A3-B4C5-6789-0123-DEFABCDEF012",
+    "name": "Balsam",
+    "price": 34.90,
+    "quantity": 20
   },
   {
-    "id": "BBF52A56-6A7F-42CA-ADAE-B41DB4345D80",
-    "name": "Mjukost",
-    "price": 31.00,
+    "id": "E2F3A4B5-C6D7-8901-2345-67890ABCDEF0",
+    "name": "Olivolja",
+    "price": 79.90,
+    "quantity": 10
+  },
+  {
+    "id": "F3A4B5C6-D7E8-9012-3456-7890ABCDEF01",
+    "name": "Vinäger",
+    "price": 25.50,
     "quantity": 30
+  },
+  {
+    "id": "A4B5C6D7-E8F9-0123-4567-890ABCDEF012",
+    "name": "Soja",
+    "price": 19.90,
+    "quantity": 25
+  },
+  {
+    "id": "B5C6D7E8-F9A0-1234-5678-90ABCDEF0123",
+    "name": "Chili",
+    "price": 14.90,
+    "quantity": 20
+  },
+  {
+    "id": "8A8DB6DC-73AD-45FA-818F-697094C1CC60",
+    "name": "Falu Rödfärg",
+    "price": 46.00,
+    "quantity": 15
+  },
+  {
+    "id": "19DD4653-0075-43FD-AFE6-591692D2DED5",
+    "name": "Viking Mjöl",
+    "price": 18.00,
+    "quantity": 20
+  },
+  {
+    "id": "45F4EF7A-D58F-455D-A651-48D1087F0791",
+    "name": "Gräddfil",
+    "price": 12.00,
+    "quantity": 26
+  },
+  {
+    "id": "5348EAFE-24E3-4679-B78A-034B32ABB48F",
+    "name": "Risenta Gryn",
+    "price": 13.50,
+    "quantity": 32
+  },
+  {
+    "id": "1B2C3D4E-5F6A-7B8C-9D0E-1F2A3B4C5D6E",
+    "name": "Lingonsylt",
+    "price": 22.50,
+    "quantity": 23
+  },
+  {
+    "id": "2A3B4C5D-6E7F-8A9B-0C1D-2E3F4A5B6C7D",
+    "name": "Pågenlimpa",
+    "price": 36.50,
+    "quantity": 27
+  },
+  {
+    "id": "3C4D5E6F-7A8B-9C0D-1E2F-3A4B5C6D7E8F",
+    "name": "Smör",
+    "price": 56.50,
+    "quantity": 17
+  },
+  {
+    "id": "4D5E6F7A-8B9C-0D1E-2F3A-4B5C6D7E8F9A",
+    "name": "Falukorv",
+    "price": 45.50,
+    "quantity": 21
   }
 ]

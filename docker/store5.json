@@ -2,61 +2,61 @@
   {
     "id": "A1B2C3D4-E5F6-7890-ABCD-EF1234567890",
     "name": "Jasmine Rice",
-    "price": 15.50,
+    "price": 25.50,
     "quantity": 30
   },
   {
     "id": "B1C2D3E4-F5G6-7890-ABCD-EF1234567891",
     "name": "Soy Sauce",
-    "price": 3.50,
+    "price": 53.50,
     "quantity": 50
   },
   {
     "id": "C1D2E3F4-G5H6-7890-ABCD-EF1234567892",
     "name": "Nori Sheets",
-    "price": 5.00,
+    "price": 25.00,
     "quantity": 40
   },
   {
     "id": "D1E2F3G4-H5I6-7890-ABCD-EF1234567893",
     "name": "Sriracha Sauce",
-    "price": 4.25,
+    "price": 40.25,
     "quantity": 25
   },
   {
     "id": "E1F2G3H4-I5J6-7890-ABCD-EF1234567894",
     "name": "Coconut Milk",
-    "price": 2.75,
+    "price": 29.75,
     "quantity": 35
   },
   {
     "id": "F1G2H3I4-J5K6-7890-ABCD-EF1234567895",
     "name": "Rice Noodles",
-    "price": 6.00,
+    "price": 26.00,
     "quantity": 20
   },
   {
     "id": "G1H2I3J4-K5L6-7890-ABCD-EF1234567896",
     "name": "Bamboo Shoots",
-    "price": 1.99,
+    "price": 19.99,
     "quantity": 15
   },
   {
     "id": "H1I2J3K4-L5M6-7890-ABCD-EF1234567897",
     "name": "Tofu",
-    "price": 2.50,
+    "price": 52.50,
     "quantity": 30
   },
   {
     "id": "I1J2K3L4-M5N6-7890-ABCD-EF1234567898",
     "name": "Sesame Oil",
-    "price": 8.00,
+    "price": 80.00,
     "quantity": 10
   },
   {
     "id": "J1K2L3M4-N5O6-7890-ABCD-EF1234567899",
     "name": "Kimchi",
-    "price": 7.50,
+    "price": 79.50,
     "quantity": 18
   }
 ]

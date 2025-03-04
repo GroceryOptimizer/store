@@ -2,79 +2,79 @@
   {
     "id": "7323BCFB-1DAA-41AA-9E53-816011102AC6",
     "name": "Matjessill",
-    "price": 29.90,
+    "price": 25.90,
     "quantity": 25
   },
   {
     "id": "99B3E53C-EFE0-456C-89CE-E4F42BAEF09A",
     "name": "Kalles Kaviar",
-    "price": 34.50,
+    "price": 32.50,
     "quantity": 30
   },
   {
     "id": "BF6B70D3-5FF9-4BFE-BABB-DD2A5AB315D4",
     "name": "Skånerost",
-    "price": 49.90,
+    "price": 44.90,
     "quantity": 15
   },
   {
     "id": "6750BA42-3371-4753-82C0-1A4E5344ADE2",
     "name": "Marabou Mjölkchoklad",
-    "price": 16.90,
+    "price": 19.90,
     "quantity": 35
   },
   {
     "id": "8926A5A1-437C-4EBD-B331-E6A9BFA02C5B",
     "name": "Tacoskal",
-    "price": 13.50,
+    "price": 23.50,
     "quantity": 28
   },
   {
     "id": "BBF52A56-6A7F-42CA-ADAE-B41DB4345D80",
     "name": "Mjukost",
-    "price": 31.00,
+    "price": 33.00,
     "quantity": 30
   },
   {
     "id": "B031364E-3453-4CCD-B1E5-6C0918A54DB1",
     "name": "Hönökaka",
-    "price": 41.00,
+    "price": 44.00,
     "quantity": 18
   },
   {
     "id": "3CB591C8-D3ED-4A3C-A26A-698167C73BE1",
     "name": "Skansen Senap",
-    "price": 20.50,
+    "price": 22.50,
     "quantity": 26
   },
   {
     "id": "7033AE51-569F-418F-BC8A-4D2E688AB179",
     "name": "Wasa Knäckebröd",
-    "price": 27.90,
+    "price": 25.90,
     "quantity": 32
   },
   {
     "id": "0481A834-44BB-4298-807E-E3DDCEF6481B",
     "name": "Ramlösa Mineralvatten",
-    "price": 23.50,
+    "price": 21.50,
     "quantity": 18
   },
   {
     "id": "78E46498-C10C-408A-B3C3-5A3E5684ABEC",
     "name": "Ägg",
-    "price": 20.90,
+    "price": 22.90,
     "quantity": 30
   },
   {
     "id": "D7E082FF-195E-4B5E-8F1B-5F503F90D1F9",
     "name": "King Edward Potatis",
-    "price": 16.00,
+    "price": 19.00,
     "quantity": 38
   },
   {
     "id": "8A8DB6DC-73AD-45FA-818F-697094C1CC60",
     "name": "Falu Rödfärg",
-    "price": 47.00,
+    "price": 42.00,
     "quantity": 14
   },
   {
@@ -128,7 +128,7 @@
   {
     "id": "5E6F7A8B-9C0D-1E2F-3A4B-5C6D7E8F9A0B",
     "name": "Pepsi Max",
-    "price": 21.00,
+    "price": 22.00,
     "quantity": 34
   },
   {
@@ -140,55 +140,55 @@
   {
     "id": "7A8B9C0D-1E2F-3A4B-5C6D-7E8F9A0B1C2D",
     "name": "Kronärtskockshjärta",
-    "price": 17.50,
+    "price": 12.50,
     "quantity": 23
   },
   {
     "id": "8B9C0D1E-2F3A-4B5C-6D7E-8F9A0B1C2D3E",
     "name": "Rödbetssallad",
-    "price": 25.00,
+    "price": 22.00,
     "quantity": 24
   },
   {
     "id": "9C0D1E2F-3A4B-5C6D-7E8F-9A0B1C2D3E4F",
     "name": "Kaffe",
-    "price": 38.90,
+    "price": 39.90,
     "quantity": 19
   },
   {
     "id": "0D1E2F3A-4B5C-6D7E-8F9A-0B1C2D3E4F5A",
     "name": "Pasta",
-    "price": 30.50,
+    "price": 38.50,
     "quantity": 31
   },
   {
     "id": "A1B2C3D4-E5F6-7890-1234-567890ABCDEF",
     "name": "Rågbröd",
-    "price": 33.90,
+    "price": 31.90,
     "quantity": 22
   },
   {
     "id": "B2C3D4E5-F6A7-8901-2345-67890ABCDEFA",
     "name": "Köttbullar",
-    "price": 50.90,
+    "price": 52.90,
     "quantity": 26
   },
   {
     "id": "C3D4E5F6-A7B8-9012-3456-7890ABCDEFAB",
     "name": "Blåbär",
-    "price": 38.00,
+    "price": 34.00,
     "quantity": 20
   },
   {
     "id": "D4E5F6A7-B8C9-0123-4567-890ABCDEFABC",
     "name": "Yoghurt Naturell",
-    "price": 15.50,
+    "price": 25.50,
     "quantity": 28
   },
   {
     "id": "E5F6A7B8-C9D0-1234-5678-90ABCDEFABCD",
     "name": "Osthyvel",
-    "price": 61.90,
+    "price": 51.90,
     "quantity": 14
   },
   {
@@ -200,19 +200,19 @@
   {
     "id": "A7B8C9D0-E1F2-3456-7890-ABCDEFABCDEF",
     "name": "Toalettpapper",
-    "price": 25.90,
+    "price": 29.90,
     "quantity": 33
   },
   {
     "id": "B8C9D0E1-F2A3-4567-8901-BCDEFABCDEF0",
     "name": "Tandborste",
-    "price": 28.90,
+    "price": 25.90,
     "quantity": 21
   },
   {
     "id": "C9D0E1F2-A3B4-5678-9012-CDEFABCDEF01",
     "name": "Schampo",
-    "price": 38.90,
+    "price": 28.90,
     "quantity": 19
   },
   {
@@ -224,7 +224,7 @@
   {
     "id": "E2F3A4B5-C6D7-8901-2345-67890ABCDEF0",
     "name": "Olivolja",
-    "price": 81.90,
+    "price": 71.90,
     "quantity": 12
   },
   {
@@ -236,13 +236,13 @@
   {
     "id": "A4B5C6D7-E8F9-0123-4567-890ABCDEF012",
     "name": "Soja",
-    "price": 20.90,
+    "price": 40.90,
     "quantity": 26
   },
   {
     "id": "B5C6D7E8-F9A0-1234-5678-90ABCDEF0123",
     "name": "Chili",
-    "price": 15.90,
+    "price": 25.90,
     "quantity": 21
   },
   {
@@ -272,7 +272,7 @@
   {
     "id": "A0B1C2D3-E4F5-6789-0123-DEF012345678",
     "name": "Ketchup",
-    "price": 16.90,
+    "price": 19.90,
     "quantity": 27
   },
   {
@@ -314,13 +314,13 @@
   {
     "id": "B18BDFF4-1E60-42C5-8AE0-92B62513ECE1",
     "name": "Mjölk",
-    "price": 10.90,
+    "price": 29.90,
     "quantity": 22
   },
   {
     "id": "8C7F6994-15A4-4183-8752-27AB45A2F13C",
     "name": "Smör",
-    "price": 61.90,
+    "price": 41.90,
     "quantity": 16
   },
   {
@@ -338,13 +338,13 @@
   {
     "id": "C61A046B-E3EF-4603-AD60-A0879C9151C7",
     "name": "Chips",
-    "price": 20.90,
+    "price": 29.90,
     "quantity": 25
   },
   {
     "id": "A135BD8A-755E-459C-81F2-2E42C9AED909",
     "name": "Popcorn",
-    "price": 13.90,
+    "price": 15.90,
     "quantity": 27
   }
 ]

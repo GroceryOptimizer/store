@@ -1,0 +1,38 @@
+[
+  {
+    "id": "7323BCFB-1DAA-41AA-9E53-816011102AC6",
+    "name": "Matjessill",
+    "price": 29.90,
+    "quantity": 25
+  },
+  {
+    "id": "99B3E53C-EFE0-456C-89CE-E4F42BAEF09A",
+    "name": "Kalles Kaviar",
+    "price": 34.50,
+    "quantity": 30
+  },
+  {
+    "id": "BF6B70D3-5FF9-4BFE-BABB-DD2A5AB315D4",
+    "name": "Skånerost",
+    "price": 49.90,
+    "quantity": 15
+  },
+  {
+    "id": "6750BA42-3371-4753-82C0-1A4E5344ADE2",
+    "name": "Marabou Mjölkchoklad",
+    "price": 16.90,
+    "quantity": 35
+  },
+  {
+    "id": "8926A5A1-437C-4EBD-B331-E6A9BFA02C5B",
+    "name": "Tacoskal",
+    "price": 13.50,
+    "quantity": 28
+  },
+  {
+    "id": "BBF52A56-6A7F-42CA-ADAE-B41DB4345D80",
+    "name": "Mjukost",
+    "price": 31.00,
+    "quantity": 30
+  }
+]

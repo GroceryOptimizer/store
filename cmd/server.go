@@ -37,7 +37,7 @@ func (s *Server) Products(ctx context.Context, req *grocer.InventoryRequest) (*g
 	// Convert stock list into a map for fast lookup
 	stockMap := make(map[string]int32)
 	for _, item := range stockItems {
-		stockMap[item.Name] = item.Price
+		stockMap[item.Product.Name]= item.Price
 	}
 
 	// Filter stock items based on requested shopping cart
@@ -46,7 +46,7 @@ func (s *Server) Products(ctx context.Context, req *grocer.InventoryRequest) (*g
 		var name = strings.ToLower(p.Name)
 		if price, found := stockMap[name]; found {
 			items = append(items, &grocer.StockItem{
-				Name:  name,
+				Product:  &grocer.Product{Name: name},
 				Price: price,
 			})
 		} else {

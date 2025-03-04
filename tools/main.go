@@ -3,6 +3,7 @@ package tools
 import (
 	"encoding/json"
 	"io"
+	"log"
 	"net"
 	"os"
 	"strconv"
@@ -12,7 +13,7 @@ import (
 	grocer "github.com/GroceryOptimizer/store/proto"
 )
 
-func GetStoreCoords() (grocer.Coordinates) {
+func GetStoreCoords() grocer.Coordinates {
 	lat, err := strconv.ParseFloat(os.Getenv("LATITUDE"), 64)
 	if err != nil {
 		errors.ErrStoreNameEnv("LATITUDE env is not set")
@@ -42,6 +43,20 @@ func GetClientAddress() string {
 	return store_addr
 }
 
+type ProductJSON struct {
+	Name string `json:"name"`
+}
+
+type StockItemJSON struct {
+	Product  ProductJSON `json:"product"`
+	Quantity int32       `json:"quantity"`
+	Price    int32       `json:"price"`
+}
+
+type StockData struct {
+	Stock []StockItemJSON `json:"stock"`
+}
+
 // Read JSON file directly into a slice of gRPC StockItem messages
 func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {
 	file, err := os.Open(filename)
@@ -52,28 +67,27 @@ func ReadJSONFile(filename string) ([]*grocer.StockItem, error) {
 
 	bytes, err := io.ReadAll(file)
 	if err != nil {
+		log.Printf("Error reading file: %v", err)
 		return nil, errors.ErrDatabaseFailure(err)
 	}
 
 	// Use a generic map to parse JSON without custom structs
-	var jsonData map[string][]map[string]interface{}
+	var jsonData StockData
 	if err := json.Unmarshal(bytes, &jsonData); err != nil {
 		return nil, err
 	}
 
+	// TODO: // This may be broken, check it
 	// Extract "stock" key and convert into []*grocer.StockItem
 	var stockItems []*grocer.StockItem
-	for _, item := range jsonData["stock"] {
-		if product, ok := item["product"].(map[string]interface{}); ok {
-			if name, exists := product["name"].(string); exists {
-				if price, exists := item["price"].(float64); exists { // JSON numbers are float64 by default
-					stockItems = append(stockItems, &grocer.StockItem{
-						Name:  name,
-						Price: int32(price),
-					})
-				}
-			}
+	for _, item := range jsonData.Stock {
+	 stockItem := &grocer.StockItem{
+				Product: &grocer.Product{Name: item.Product.Name},
+				Quantity: item.Quantity,
+				Price: item.Price,
 		}
+		log.Printf("StockItem: %v", stockItem)
+		stockItems = append(stockItems, stockItem)
 	}
 
 	return stockItems, nil

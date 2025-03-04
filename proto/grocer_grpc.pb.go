@@ -159,7 +159,8 @@ var StoreService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	HubService_HandShake_FullMethodName = "/grocer.HubService/HandShake"
+	HubService_HandShake_FullMethodName       = "/grocer.HubService/HandShake"
+	HubService_UpdateInventory_FullMethodName = "/grocer.HubService/UpdateInventory"
 )
 
 // HubServiceClient is the client API for HubService service.
@@ -167,6 +168,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HubServiceClient interface {
 	HandShake(ctx context.Context, in *HandShakeRequest, opts ...grpc.CallOption) (*HandShakeResponse, error)
+	UpdateInventory(ctx context.Context, in *UpdateInventoryRequest, opts ...grpc.CallOption) (*UpdateInventoryResponse, error)
 }
 
 type hubServiceClient struct {
@@ -187,11 +189,22 @@ func (c *hubServiceClient) HandShake(ctx context.Context, in *HandShakeRequest, 
 	return out, nil
 }
 
+func (c *hubServiceClient) UpdateInventory(ctx context.Context, in *UpdateInventoryRequest, opts ...grpc.CallOption) (*UpdateInventoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateInventoryResponse)
+	err := c.cc.Invoke(ctx, HubService_UpdateInventory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // HubServiceServer is the server API for HubService service.
 // All implementations must embed UnimplementedHubServiceServer
 // for forward compatibility.
 type HubServiceServer interface {
 	HandShake(context.Context, *HandShakeRequest) (*HandShakeResponse, error)
+	UpdateInventory(context.Context, *UpdateInventoryRequest) (*UpdateInventoryResponse, error)
 	mustEmbedUnimplementedHubServiceServer()
 }
 
@@ -204,6 +217,9 @@ type UnimplementedHubServiceServer struct{}
 
 func (UnimplementedHubServiceServer) HandShake(context.Context, *HandShakeRequest) (*HandShakeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HandShake not implemented")
+}
+func (UnimplementedHubServiceServer) UpdateInventory(context.Context, *UpdateInventoryRequest) (*UpdateInventoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateInventory not implemented")
 }
 func (UnimplementedHubServiceServer) mustEmbedUnimplementedHubServiceServer() {}
 func (UnimplementedHubServiceServer) testEmbeddedByValue()                    {}
@@ -244,6 +260,24 @@ func _HubService_HandShake_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _HubService_UpdateInventory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateInventoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HubServiceServer).UpdateInventory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HubService_UpdateInventory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HubServiceServer).UpdateInventory(ctx, req.(*UpdateInventoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // HubService_ServiceDesc is the grpc.ServiceDesc for HubService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -254,6 +288,10 @@ var HubService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "HandShake",
 			Handler:    _HubService_HandShake_Handler,
+		},
+		{
+			MethodName: "UpdateInventory",
+			Handler:    _HubService_UpdateInventory_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

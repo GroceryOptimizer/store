@@ -25,9 +25,9 @@ services:
       - STORE_NAME=Coop
       - GRPC_SERVER_ADDRESS=host.docker.internal:5241
       - STORE_HOST=host.docker.internal
+      - STORE_PORT=50052
       - LATITUDE=40.3
       - LONGITUDE=32.1
-      - STORE_PORT=50052
     ports:
       - "50052:50052"
     volumes:
@@ -41,9 +41,9 @@ services:
       - STORE_NAME=Willys
       - GRPC_SERVER_ADDRESS=host.docker.internal:5241
       - STORE_HOST=host.docker.internal
+      - STORE_PORT=50053
       - LATITUDE=70.3
       - LONGITUDE=42.1
-      - STORE_PORT=50053
     ports:
       - "50053:50053"
     volumes:

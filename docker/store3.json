@@ -1,39 +1,33 @@
 {
   "stock": [
     {
-      "product": {
-        "name": "chicken"
-      },
+      "product": { "name": "chicken" },
+      "quantity": 10,
       "price": 55
     },
     {
-      "product": {
-        "name": "beef"
-      },
+      "product": { "name": "beef" },
+      "quantity": 10,
       "price": 85
     },
     {
-      "product": {
-        "name": "fish"
-      },
+      "product": { "name": "fish" },
+      "quantity": 10,
       "price": 75
     },
     {
-      "product": {
-        "name": "pork"
-      },
+      "product": { "name": "pork" },
+      "quantity": 10,
       "price": 80
     },
     {
-      "product": {
-        "name": "lamb"
-      },
+      "product": { "name": "lamb" },
+      "quantity": 10,
       "price": 95
     },
     {
-      "product": {
-        "name": "duck"
-      },
+      "product": { "name": "duck" },
+      "quantity": 10,
       "price": 65
     }
   ]

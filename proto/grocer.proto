@@ -12,6 +12,7 @@ service StoreService{
 
 service HubService{
   rpc HandShake (HandShakeRequest) returns (HandShakeResponse);
+  rpc UpdateInventory (UpdateInventoryRequest) returns (UpdateInventoryResponse);
 }
 
 message Store{
@@ -50,10 +51,20 @@ message InventoryRequest{
 }
 
 message StockItem{
-  string name = 1;
+  Product product = 1;
   int32 price = 2;
+  int32 quantity = 3;
 }
 
 message InventoryResponse{
   repeated StockItem stockItems = 1;
+}
+
+message UpdateInventoryRequest{
+  string storeId = 1;
+  repeated StockItem stockItems = 2;
+}
+
+message UpdateInventoryResponse{
+  string message = 1;
 }

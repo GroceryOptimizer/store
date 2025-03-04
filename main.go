@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"os"
+	"sync"
 	"time"
 
 	"log"
@@ -17,14 +18,16 @@ import (
 // gRPC Server Initialization
 func main() {
 	port := os.Getenv("STORE_PORT")
+	log.Printf("port: %v", port)
 	if port == "" {
-		port = ":12345"
+		port = "12345"
 	}
 
 	lis, err := net.Listen("tcp", ":"+port)
 	if err != nil {
-		log.Fatalf("Failed to listen: %v", err)
+		log.Fatalf("Failed to listen to %s: %v", port, err)
 	}
+	log.Printf("gRPC Go server listening on port %v", port)
 	serviceConfig := `{
 	  "methodConfig": [{
 	    "name": [{"service": "grocer.StoreService"}],
@@ -37,9 +40,23 @@ func main() {
 	    }
 	  }]
 	}`
+	wg := &sync.WaitGroup{}
+
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	cmd.ClientHandshake(ctx, serviceConfig)
 	defer cancel()
+
+	conn := &grpc.ClientConn{}
+	res := &grocer.HandShakeResponse{}
+	wg.Add(1)
+	go func () {
+		defer wg.Done()
+		conn, res, _ = cmd.ClientHandshake(ctx, serviceConfig)
+	}()
+	wg.Wait()
+	defer conn.Close()
+
+	resp, _ := cmd.UpdateInventory(ctx, conn, res.Id)
+	log.Println("inventory response: ", resp)
 
 	grpcServer := grpc.NewServer()
 
@@ -47,7 +64,6 @@ func main() {
 
 	//fmt.Println(os.Getenv("STORE_NAME"))
 
-	log.Println("gRPC Go server listening on port 50051...")
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
 	}
